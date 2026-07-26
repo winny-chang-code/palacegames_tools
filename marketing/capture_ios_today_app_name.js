@@ -1,4 +1,5 @@
 (() => {
+  const version = "v1.0.0"; // 設定版本號
   const e = document.querySelectorAll('a[href*="/app/"]'),
     t = [];
   e.forEach((e) => {
@@ -12,5 +13,5 @@
     }
   });
   const s = t.join("、");
-  prompt(`✅ 已成功抓取全頁共 ${t.length} 款遊戲！\n請按下 Ctrl+C 複製下方文字：`, s);
+  prompt(`✅ [${version}] 已成功抓取全頁共 ${t.length} 款遊戲！\n請按下 Ctrl+C 複製下方文字：`, s);
 })();
