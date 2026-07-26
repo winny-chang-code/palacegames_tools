@@ -33,7 +33,9 @@
       "Solo Leveling:Arise": "我獨自升級：ARISE",
       "星城-歡慶77幸運日": "星城娛樂城",
       "Kingshot": "Kingshot",
-      "Pikmin Bloom": "Pikmin Bloom"
+      "Pikmin Bloom": "Pikmin Bloom",
+      "Garena 傳說對決：冥定王牌版本": "Garena 傳說對決",
+      "Heartopia": "心動小鎮"
     };
 
     // 取得中文名稱之輔助函式
