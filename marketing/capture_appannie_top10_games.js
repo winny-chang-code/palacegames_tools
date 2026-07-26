@@ -1,10 +1,61 @@
 /**
  * Palace Games Tools - App Annie Game Top 10 Excel/TSV Extractor
- * Version: v1.0.0
+ * Version: v1.1.0
  * Description: Extracts top 10 grossing games from data.ai / App Annie and exports as .xls file.
+ * Features: Built-in Dictionary for Chinese game name translation.
  */
 (function () {
   try {
+    // ==========================================
+    // 0. 遊戲中文名稱字典 (可隨時自行補充與修改)
+    // ==========================================
+    const gameTranslationMap = {
+      // 常用熱門遊戲
+      "Honor of Kings": "王者榮耀",
+      "Genshin Impact": "原神",
+      "Honkai: Star Rail": "崩壞：星穹鐵道",
+      "ROBLOX": "Roblox 機器人塊體",
+      "PUBG MOBILE": "絕地求生 M",
+      "MONOPOLY GO!": "地產大亨 GO!",
+      "Coin Master": "金幣大師",
+      "Candy Crush Saga": "糖果傳奇",
+      "Royal Match": "皇家匹配",
+      "Brawl Stars": "荒野亂鬥",
+      "Clash of Clans": "部落衝突",
+      "Pokémon GO": "Pokémon GO",
+      "Whiteout Survival": "寒霜啟示錄",
+      "Last War:Survival": "Last War:Survival",
+      "AFK Journey": "劍與遠征：啟程",
+      "Fate/Grand Order": "Fate/Grand Order",
+      "Monster Strike": "怪物彈珠",
+      "Puzzle & Dragons": "龍族拼圖",
+      "Uma Musume Pretty Derby": "賽馬娘 Pretty Derby",
+      "Solo Leveling:Arise": "我獨自升級：ARISE",
+      "星城-歡慶77幸運日": "星城娛樂城",
+      "Kingshot": "Kingshot",
+      "Pikmin Bloom": "Pikmin Bloom"
+    };
+
+    // 取得中文名稱之輔助函式
+    const getChineseGameName = (originalName) => {
+      const trimmedName = originalName.trim();
+      
+      // 1. 完全比對
+      if (gameTranslationMap[trimmedName]) {
+        return gameTranslationMap[trimmedName];
+      }
+
+      // 2. 部分比對（若原名包含字典鍵值）
+      for (const [key, value] of Object.entries(gameTranslationMap)) {
+        if (trimmedName.toLowerCase().includes(key.toLowerCase())) {
+          return value;
+        }
+      }
+
+      // 3. 查無資料時的預設清理邏輯（去除冒號或連字號後的副標題）
+      return trimmedName.split(/[:-]/)[0].trim();
+    };
+
     // 1. 抓取過濾器容器與頁面特徵
     const container =
       document.querySelector('[class*="ReportPickersLayout__FiltersContainer"]') ||
@@ -95,8 +146,11 @@
           const name = text[nameIndex] || '';
           if (name && !gameRow.includes(name)) {
             gameRow.push(name);
-            const cleanName = name.split(/[:-]/)[0].trim();
+            
+            // 使用字典翻譯中文名稱
+            const cleanName = getChineseGameName(name);
             zhRow.push(cleanName);
+            
             count++;
           }
         }
