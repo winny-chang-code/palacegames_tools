@@ -1,6 +1,6 @@
 /**
  * Palace Games Tools - App Annie Game Top 10 Excel/TSV Extractor
- * Version: v1.1.0
+ * Version: v1.1.3
  * Description: Extracts top 10 grossing games from data.ai / App Annie and exports as .xls file.
  * Features: Built-in Dictionary for Chinese game name translation.
  */
@@ -44,7 +44,7 @@
       "包你發": "包你發娛樂城",
       "鬥破蒼穹M：少年崛起--動畫正版授權": "鬥破蒼穹M：少年崛起",
       "星城-歡慶77幸運日": "星城Online",
-      "Clash of Critters ": "塔塔冒險隊",
+      "Clash of Critters": "塔塔冒險隊",
       "麻将 神来也麻将－台湾16张、麻雀": "神來也麻將"
     };
 
