@@ -44,7 +44,7 @@
       "包你發": "包你發娛樂城",
       "鬥破蒼穹M：少年崛起--動畫正版授權": "鬥破蒼穹M：少年崛起",
       "星城-歡慶77幸運日": "星城Online",
-      "Clash of Critters": "塔塔冒險隊",
+      "Clash of Critters ": "塔塔冒險隊",
       "麻将 神来也麻将－台湾16张、麻雀": "神來也麻將"
     };
 
@@ -57,9 +57,13 @@
         return gameTranslationMap[trimmedName];
       }
 
-      // 2. 部分比對（若原名包含字典鍵值）
+      // 2. 部分比對（雙向包含比對 + 強制移除前後空白）
       for (const [key, value] of Object.entries(gameTranslationMap)) {
-        if (trimmedName.toLowerCase().includes(key.toLowerCase())) {
+        const cleanKey = key.trim().toLowerCase();
+        const cleanOriginal = trimmedName.toLowerCase();
+        
+        // 無論是原名包含 Key，或是 Key 包含原名，只要吻合就替換
+        if (cleanOriginal.includes(cleanKey) || cleanKey.includes(cleanOriginal)) {
           return value;
         }
       }
